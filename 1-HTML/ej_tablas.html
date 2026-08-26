@@ -1,47 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Tablas</title>
 
     <style>
-        table, tr, td, th{
+        table, tr, td, th {
             border: 1px solid #000000;
         }
     </style>
 </head>
-
-<!--Cree una tabla para visualizar la  información de los diferentes congresos (emplee etiquetas semánticas de tablas)-->
-<!--Elimine las siglas CPAR, y 'Campus Party' debe ocupar 2 celdas-->
-<!--Como campus party y Jaiio comparten el mismo lugar, unifique las celdas que contienen 'Buenos Aires'-->
 <body>
+    <table>
+        <thead>
+            <tr>
+                <th>Siglas</th>
+                <th>Congreso o Evento</th>
+                <th>Carrera</th>
+                <th>Web</th>
+                <th>Lugar</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
 
-Siglas
-Congreso o Evento
-Carrera
-Web
-Lugar
-Fecha
+        <tbody>
+            <tr>
+                <td colspan="2">Campus Party</td>
+                <td>Computación/Sistemas</td>
+                <td><a href="http://argentina.campus-party.org/">http://argentina.campus-party.org/</a></td>
+                <td rowspan="2">Buenos Aires</td>
+                <td>25-abr al 28-abr</td>
+            </tr>
 
-CPAR
-Campus Party
-Computación/Sistemas
-http://argentina.campus-party.org/
-Buenos Aires
-25-abr al 28-abr
+            <tr>
+                <td>JAIIO</td>
+                <td>Jornadas Argentinas de Informática</td>
+                <td>Computación/Sistemas</td>
+                <td><a href="http://47jaiio.sadio.org.ar">http://47jaiio.sadio.org.ar</a></td>
+                <td>3-sep al 7-sep</td>
+            </tr>
 
-JAIIO
-Jornadas Argentinas de Informática
-Computación/Sistemas
-http://47jaiio.sadio.org.ar
-Buenos Aires
-3-sep al 7-sep
-
-WICC
-Workshop de Investigadores en Ciencias de la Computación
-Computación/Sistemas
-http://wicc2018.unne.edu.ar/
-Corrientes
-18-mar al 27-abr
+            <tr>
+                <td>WICC</td>
+                <td>Workshop de Investigadores en Ciencias de la Computación</td>
+                <td>Computación/Sistemas</td>
+                <td><a href="http://wicc2018.unne.edu.ar/">http://wicc2018.unne.edu.ar/</a></td>
+                <td>Corrientes</td>
+                <td>18-mar al 27-abr</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

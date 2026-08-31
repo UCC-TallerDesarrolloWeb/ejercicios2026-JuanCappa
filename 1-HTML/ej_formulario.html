@@ -18,11 +18,13 @@
             <legend>Datos de registro</legend>
 
             <p>
-                Nombre: <input type="text" size="40" maxlength="40" placeholder="Ingrese su nombre">
+                <label for="nombre">Nombre: </label>
+                <input type="text" id="nombre" size="40" maxlength="40" placeholder="Ingrese su nombre">
             </p>
 
             <p>
-                Apellido: <input type="text" size="40" maxlength="40" placeholder="Ingrese su apellido">
+                <label for="apellido"> Apellido: </label>
+                <input type="text" id="apellido" size="40" maxlength="40" placeholder="Ingrese su apellido">
             </p>
 
             <p>
@@ -32,23 +34,29 @@
             </p>
 
             <p>
-                Edad: <input type="number" maxlength="3" placeholder="Edad">
+                <label for="edad"> Edad: </label>
+                <input type="number" id="edad" maxlength="3" placeholder="Edad">
             </p>
 
             <p>
-                Email: <input type="email" size="40" maxlength="60" placeholder="ejemplo@correo.com">
+                <label for="email">Email:</label>
+                <input type="email" id="email" size="40" maxlength="60" placeholder="ejemplo@correo.com">
             </p>
 
             <p>
-                Usuario: <input type="text" size="40" maxlength="20" placeholder="Nombre de usuario">
+
+                <label for="usuario">Usuario: </label>
+                <input type="text" id="usuario" size="40" maxlength="20" placeholder="Nombre de usuario">
             </p>
 
             <p>
-                Password: <input type="password" maxlength="20" placeholder="Contraseña">
+                <label for="password">Password: </label>
+                <input type="password" id="password" maxlength="20" placeholder="Contraseña">
             </p>
 
             <p>
-                Confirmar Password: <input type="password" maxlength="20" placeholder="Repita la contraseña">
+                <label for="confirmar password">Confirmar Password:</label>
+                <input type="password" id="confirmar password" maxlength="20" placeholder="Repita la contraseña">
             </p>
 
             <p>
@@ -61,7 +69,7 @@
             </p>
 
             <p>
-                Tema:
+                <label for="tema">tema:</label>
                 <input type="checkbox" name="tema" value="politica"> Política
                 <input type="checkbox" name="tema" value="negocios"> Negocios
                 <input type="checkbox" name="tema" value="tecnologia"> Tecnología
@@ -69,7 +77,8 @@
             </p>
 
             <p>
-                Agregue un comentario:<br>
+                <label for="">Agregue un comentario:</label>
+                g<br>
                 <textarea rows="4" cols="50" placeholder="Escriba su comentario"></textarea>
             </p>
 

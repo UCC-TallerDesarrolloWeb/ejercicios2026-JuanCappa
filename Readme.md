@@ -34,16 +34,16 @@
 -  [x] Incrustado
 -  [x] Estilo con Descendientes
 -  [x] Pseudo Clases
--  [] CV
--  [] Backgrounds
--  [] Position
--  [] 2 Columnas
--  [] Grid
--  [] grid-areas
--  [] Mejora
--  [] Transitions
--  [] Viewport
--  [] Responsive
+-  [x] CV
+-  [ ] Backgrounds
+-  [ ] Position
+-  [ ] 2 Columnas
+-  [ ] Grid
+-  [ ] grid-areas
+-  [ ] Mejora
+-  [ ] Transitions
+-  [ ] Viewport
+-  [ ] Responsive
 
 ## Unidad 3: JavaScript y ES6+
 

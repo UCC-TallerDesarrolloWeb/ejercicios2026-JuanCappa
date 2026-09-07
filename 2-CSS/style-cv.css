@@ -1,0 +1,26 @@
+.main-style {
+    text-align: center;
+    background: linear-gradient(to right, rgb(99, 59, 59), rgb(87, 87, 96));
+
+}
+
+h3 {
+    font-family: "Caacupe One", sans-serif;
+    text-shadow: 10px 8px green;
+}
+
+/* estilos de tarjetas con... */
+div {
+    border: 1px solid rgb(28, 13, 42);
+    margin: 15px;
+    padding: 10px;
+    background-color: aquamarine;
+    border-radius: 15px;
+    box-shadow: 10px 8px grey;
+}
+
+#user {
+    width: 85px;
+    float: left;
+    border-radius: 50%;
+}

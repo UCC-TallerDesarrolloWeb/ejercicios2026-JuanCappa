@@ -9,22 +9,28 @@
 </head>
 <body class="body-num">
 
-<div class="centrado div-conver">
-    <h1>Conversor de Unidades</h1>
-    <form>
-        <p>
-            <label for="metro"> Metro</label> = <input id="metro" type="text" name="unid_metro">
-        </p>
-        <p>
-            <label for="pulgada"> Pulgada</label> = <input id="pulgada" type="text" name="unid_pulgada">
-        </p>
-        <p>
-            <label for="pie"> Pie </label> = <input id="pie" type="text" name="unid_pie">
-        </p>
-        <p>
-            <label for="yarda"> Yarda</label> = <input id="yarda" type="text" name="unid_yarda">
-        </p>
-    </form>
-</div>
+    <div class="centrado div-conver">
+        <h1>Conversor de Unidades</h1>
+
+        <form>
+            <p>
+                <label for="metro">Metro</label> =
+                <input id="metro" type="text" name="unid_metro" onchange="ConversorUnidades(this.id, this.value)">
+            </p>
+            <p>
+                <label for="pulgada">Pulgada</label> =
+                <input id="pulgada" type="text" name="unid_pulgada" onchange="ConversorUnidades(this.id, this.value)">
+            </p>
+            <p>
+                <label for="pie">Pie</label> =
+                <input id="pie" type="text" name="unid_pie" onchange="ConversorUnidades(this.id, this.value)">
+            </p>
+            <p>
+                <label for="yarda">Yarda</label> =
+                <input id="yarda" type="text" name="unid_yarda" onchange="ConversorUnidades(this.id, this.value)">
+            </p>
+        </form>
+
+    </div>
 </body>
 </html>

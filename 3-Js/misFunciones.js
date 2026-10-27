@@ -79,14 +79,34 @@ const mostrarOcultarDiv = (opcion) => {
 };
 
 
+
 /**
- * Abre el cuadro de diálogo del producto.
+ * Muestra los detalles del producto seleccionado.
+ * @param {number} index - Posición del producto en el array.
  * @returns {void}
  */
-const mostrarDialogProducto = () => {
+const mostrarDialogProducto = (index) => {
+    const producto = productos[index];
+
+    if (!producto) {
+        return;
+    }
+
+    const contenido = document.getElementById("contenidoDetalle");
+
+    contenido.innerHTML = `
+        <h2>${producto.nombre}</h2>
+        <p>${producto.description}</p>
+        <p>Marca: ${producto.marca}</p>
+        <p>Categoría: ${producto.categoria}</p>
+        <p>Talles: ${producto.talle.join(", ")}</p>
+        <p>Precio: $${producto.precio}</p>
+    `;
+
     const dialog = document.getElementById("detalleProducto");
     dialog.showModal();
 };
+
 
 /**
  * Cierra el cuadro de diálogo del producto.
@@ -154,4 +174,112 @@ const calcularOperacion = (operacion) => {
     }
 
     resultado.innerHTML = total;
+};
+
+/**
+ * Crea una tarjeta HTML por cada producto.
+ * @returns {void}
+ */
+const renderizarProductos = () => {
+    const catalogo = document.getElementById("catalogoProductos");
+
+    let tarjetas = "";
+
+    productos.forEach((producto, index) => {
+        tarjetas += `
+            <div class="producto-card">
+                <img src="images/${producto.imagen}"
+                     alt="${producto.nombre}">
+
+                <h3>${producto.nombre}</h3>
+
+                <p>Precio: $${producto.precio}</p>
+
+                
+                <button type="button"
+                onclick="mostrarDialogProducto(${index})">
+                Ver detalle de Producto
+                </button>
+
+                <button type="button"
+                onclick="agregarAlCarrito(${index})">
+                Agregar al carrito
+                </button>
+
+            </div>
+        `;
+    });
+
+    catalogo.innerHTML = tarjetas;
+};
+
+/**
+ * Agrega un producto al carrito y lo guarda en localStorage.
+ * @param {number} index - Posición del producto en el array.
+ * @returns {void}
+ */
+const agregarAlCarrito = (index) => {
+    const producto = productos[index];
+
+    if (!producto) {
+        return;
+    }
+
+    // Recuperamos el carrito guardado.
+    const carrito = JSON.parse(
+        localStorage.getItem("carrito")
+    ) || [];
+
+    // Agregamos el producto.
+    carrito.push(producto);
+
+    // Guardamos el carrito actualizado.
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert(producto.nombre + " agregado al carrito");
+};
+
+/**
+ * Muestra los productos guardados en el carrito.
+ * @returns {void}
+ */
+const renderizarCarrito = () => {
+
+    // Recuperamos los productos guardados.
+    const carrito = JSON.parse(
+        localStorage.getItem("carrito")
+    ) || [];
+
+    const contenedor = document.getElementById("listaCarrito");
+    const totalElemento = document.getElementById("totalCarrito");
+
+    let html = "";
+    let total = 0;
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
+        totalElemento.innerHTML = "Total: $0";
+        return;
+    }
+
+    // Recorremos los productos del carrito.
+    carrito.forEach((producto) => {
+
+        html += `
+            <div class="producto-card">
+                <h3>${producto.nombre}</h3>
+                <p>Marca: ${producto.marca}</p>
+                <p>Precio: $${producto.precio.toLocaleString("es-AR")}</p>
+            </div>
+        `;
+
+        total += producto.precio;
+    });
+
+    // Mostramos el listado.
+    contenedor.innerHTML = html;
+
+    // Mostramos el total de la compra.
+    totalElemento.innerHTML =
+        "Total: $" + total.toLocaleString("es-AR");
 };

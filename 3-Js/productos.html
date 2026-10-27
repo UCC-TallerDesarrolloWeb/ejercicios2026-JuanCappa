@@ -6,38 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Productos</title>
     <link rel="stylesheet" href="miEstilo.css">
+    <script src="tienda.js" defer></script>
     <script src="misFunciones.js" defer></script>
 </head>
-<body>
+<body onload="renderizarProductos()">
     <header>
         <h1>Tienda de Taekwondo</h1>
     </header>
+    <nav>
+    <a href="productos.html">Productos</a>
+    <a href="carrito.html">Carrito</a>
+    
 
     <main>
-        <h2>Nuestros Productos</h2>
-
-        <div>
-            <h3>Cabezal Sparring</h3>
-            <p>Precio: $35.000</p>
-
-            <button type="button"
-                    onclick="mostrarDialogProducto()">
-                Ver detalle de Producto
-            </button>
-        </div>
+            <h2>Nuestros Productos</h2>
+            <div id="catalogoProductos" class="productos-grid"></div>
     </main>
 
-    <dialog id="detalleProducto">
-        <h2>Cabezal Sparring</h2>
-        <p>Cabezal de Sparring.</p>
-        <p>Marca: Gran Marc</p>
-        <p>Precio: $35.000</p>
+   
+<dialog id="detalleProducto">
+    <div id="contenidoDetalle"></div>
 
-        <button type="button"
-                onclick="cerrarDialogProducto()">
-            Cerrar
-        </button>
-    </dialog>
+    <button type="button"
+            onclick="cerrarDialogProducto()">
+        Cerrar
+    </button>
+</dialog>
+
 
     <footer>
         <p>Tienda de Taekwondo</p>

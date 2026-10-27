@@ -176,42 +176,98 @@ const calcularOperacion = (operacion) => {
     resultado.innerHTML = total;
 };
 
+
 /**
- * Crea una tarjeta HTML por cada producto.
+ * Renderiza y filtra los productos del catálogo.
  * @returns {void}
  */
 const renderizarProductos = () => {
-    const catalogo = document.getElementById("catalogoProductos");
 
+    // Obtenemos los valores de los filtros
+    const busqueda = document.getElementById("busquedaProducto")
+        .value.toLowerCase().trim();
+
+    const precioMin = document.getElementById("precioMin").value;
+    const precioMax = document.getElementById("precioMax").value;
+
+    const marca = document.getElementById("marcaProducto").value;
+
+    // Obtenemos las categorías seleccionadas
+    const categoriasSeleccionadas = Array.from(
+        document.querySelectorAll(
+            'input[name="categoria"]:checked'
+        )
+    ).map(checkbox => checkbox.value);
+
+    // Conservamos el índice original de cada producto
+    const productosConIndice = productos.map((producto, index) => {
+        return { producto, index };
+    });
+
+    // Aplicamos todos los filtros
+    const productosFiltrados = productosConIndice.filter(({ producto }) => {
+
+        const cumpleBusqueda = producto.nombre
+            .toLowerCase().includes(busqueda);
+
+        const cumplePrecioMin = precioMin === "" ||
+            producto.precio >= Number(precioMin);
+
+        const cumplePrecioMax = precioMax === "" ||
+            producto.precio <= Number(precioMax);
+
+        const cumpleMarca = marca === "" ||
+            producto.marca === marca;
+
+        const cumpleCategoria =
+            categoriasSeleccionadas.length === 0 ||
+            categoriasSeleccionadas.includes(producto.categoria);
+
+        return cumpleBusqueda &&
+               cumplePrecioMin &&
+               cumplePrecioMax &&
+               cumpleMarca &&
+               cumpleCategoria;
+    });
+
+    // Generamos las tarjetas
     let tarjetas = "";
 
-    productos.forEach((producto, index) => {
+    productosFiltrados.forEach(({ producto, index }) => {
+
         tarjetas += `
             <div class="producto-card">
+
                 <img src="images/${producto.imagen}"
                      alt="${producto.nombre}">
 
                 <h3>${producto.nombre}</h3>
 
-                <p>Precio: $${producto.precio}</p>
+                <p>Precio: ${formatearPrecio(producto.precio)}</p>
 
-                
                 <button type="button"
-                onclick="mostrarDialogProducto(${index})">
-                Ver detalle de Producto
+                        onclick="mostrarDialogProducto(${index})">
+                    Ver detalle de Producto
                 </button>
 
                 <button type="button"
-                onclick="agregarAlCarrito(${index})">
-                Agregar al carrito
+                        onclick="agregarAlCarrito(${index})">
+                    Agregar al carrito
                 </button>
 
             </div>
         `;
     });
 
-    catalogo.innerHTML = tarjetas;
+    const catalogo = document.getElementById("catalogoProductos");
+
+    if (productosFiltrados.length === 0) {
+        catalogo.innerHTML = "<p>No se encontraron productos.</p>";
+    } else {
+        catalogo.innerHTML = tarjetas;
+    }
 };
+
 
 /**
  * Agrega un producto al carrito y lo guarda en localStorage.
@@ -235,17 +291,19 @@ const agregarAlCarrito = (index) => {
 
     // Guardamos el carrito actualizado.
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarContadorCarrito();
 
     alert(producto.nombre + " agregado al carrito");
 };
-
 /**
  * Muestra los productos guardados en el carrito.
  * @returns {void}
  */
 const renderizarCarrito = () => {
+    const renderizarCarrito = () => {
+    actualizarContadorCarrito();
 
-    // Recuperamos los productos guardados.
+    // Acá sigue el código que ya tenías.
     const carrito = JSON.parse(
         localStorage.getItem("carrito")
     ) || [];
@@ -262,24 +320,106 @@ const renderizarCarrito = () => {
         return;
     }
 
-    // Recorremos los productos del carrito.
-    carrito.forEach((producto) => {
+    carrito.forEach((producto, index) => {
 
         html += `
             <div class="producto-card">
                 <h3>${producto.nombre}</h3>
                 <p>Marca: ${producto.marca}</p>
-                <p>Precio: $${producto.precio.toLocaleString("es-AR")}</p>
+                <p>Precio: ${formatearPrecio(producto.precio)}</p>
+
+                <button type="button"
+                        onclick="eliminarDelCarrito(${index})">
+                    Eliminar Producto
+                </button>
             </div>
         `;
 
         total += producto.precio;
     });
 
-    // Mostramos el listado.
     contenedor.innerHTML = html;
 
-    // Mostramos el total de la compra.
     totalElemento.innerHTML =
-        "Total: $" + total.toLocaleString("es-AR");
+    "Total: " + formatearPrecio(total);
 };
+
+/**
+ * Elimina todos los productos del carrito.
+ * @returns {void}
+ */
+const vaciarCarrito = () => {
+
+    localStorage.removeItem("carrito");
+
+    renderizarCarrito();
+
+    alert("El carrito se vació correctamente");
+};
+
+
+/**
+ * Elimina un producto individual del carrito.
+ * @param {number} index - Posición del producto.
+ * @returns {void}
+ */
+const eliminarDelCarrito = (index) => {
+
+    const carrito = JSON.parse(
+        localStorage.getItem("carrito")
+    ) || [];
+
+    if (index < 0 || index >= carrito.length) {
+        return;
+    }
+
+    // Eliminamos un producto del array
+    carrito.splice(index, 1);
+
+    // Guardamos los cambios
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+    // Actualizamos la pantalla
+    renderizarCarrito();
+};
+
+/**
+ * Formatea un precio en pesos argentinos.
+ * @param {number} precio - Precio del producto.
+ * @returns {string} Precio formateado.
+ */
+const formatearPrecio = (precio) => {
+    const formato = new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    return formato.format(precio);
+};
+
+/**
+ * Actualiza el contador de productos del carrito.
+ * @returns {void}
+ */
+const actualizarContadorCarrito = () => {
+    const carrito = JSON.parse(
+        localStorage.getItem("carrito")
+    ) || [];
+
+    const contador = document.getElementById("contadorCarrito");
+
+    if (contador) {
+        contador.textContent = carrito.length;
+    }
+};
+
+// Actualizar al cargar la página.
+document.addEventListener(
+    "DOMContentLoaded",
+    actualizarContadorCarrito
+);

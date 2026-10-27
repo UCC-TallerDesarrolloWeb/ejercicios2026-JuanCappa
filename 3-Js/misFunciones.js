@@ -230,10 +230,17 @@ const renderizarProductos = () => {
                cumpleCategoria;
     });
 
-    // Generamos las tarjetas
+    
+            const criterioOrden = document.getElementById("ordenProductos").value;
+
+            const productosOrdenados = ordenarProductos(
+            productosFiltrados,
+            criterioOrden
+            );
+
     let tarjetas = "";
 
-    productosFiltrados.forEach(({ producto, index }) => {
+    productosOrdenados.forEach(({ producto, index }) => {
 
         tarjetas += `
             <div class="producto-card">
@@ -295,15 +302,15 @@ const agregarAlCarrito = (index) => {
 
     alert(producto.nombre + " agregado al carrito");
 };
+
 /**
- * Muestra los productos guardados en el carrito.
+ * Muestra los productos del carrito agrupados por cantidad.
  * @returns {void}
  */
 const renderizarCarrito = () => {
-    const renderizarCarrito = () => {
+
     actualizarContadorCarrito();
 
-    // Acá sigue el código que ya tenías.
     const carrito = JSON.parse(
         localStorage.getItem("carrito")
     ) || [];
@@ -314,35 +321,75 @@ const renderizarCarrito = () => {
     let html = "";
     let total = 0;
 
+    // Comprobamos si el carrito está vacío.
     if (carrito.length === 0) {
         contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
-        totalElemento.innerHTML = "Total: $0";
+        totalElemento.innerHTML = "Total: " + formatearPrecio(0);
         return;
     }
 
+    // Agrupamos los productos repetidos.
+    const productosAgrupados = [];
+
     carrito.forEach((producto, index) => {
+
+        const existente = productosAgrupados.find(
+            (item) => item.producto.nombre === producto.nombre
+        );
+
+        if (existente) {
+            existente.cantidad++;
+        } else {
+            productosAgrupados.push({
+                producto: producto,
+                cantidad: 1,
+                indiceOriginal: index
+            });
+        }
+    });
+
+    // Generamos una tarjeta por cada producto diferente.
+    productosAgrupados.forEach((item) => {
+
+        const producto = item.producto;
+        const cantidad = item.cantidad;
+
+        const subtotal = producto.precio * cantidad;
+
+        total += subtotal;
 
         html += `
             <div class="producto-card">
                 <h3>${producto.nombre}</h3>
+
                 <p>Marca: ${producto.marca}</p>
-                <p>Precio: ${formatearPrecio(producto.precio)}</p>
+
+                <p>Precio unitario:
+                    ${formatearPrecio(producto.precio)}
+                </p>
+
+                <p>Cantidad: ${cantidad}</p>
+
+                <p>Subtotal:
+                    ${formatearPrecio(subtotal)}
+                </p>
 
                 <button type="button"
-                        onclick="eliminarDelCarrito(${index})">
-                    Eliminar Producto
+                        onclick="eliminarDelCarrito(${item.indiceOriginal})">
+                    Eliminar una unidad
                 </button>
             </div>
         `;
-
-        total += producto.precio;
     });
 
+    // Mostramos las tarjetas.
     contenedor.innerHTML = html;
 
+    // Mostramos el total a pagar.
     totalElemento.innerHTML =
-    "Total: " + formatearPrecio(total);
+        "Total a pagar: " + formatearPrecio(total);
 };
+
 
 /**
  * Elimina todos los productos del carrito.
@@ -423,3 +470,47 @@ document.addEventListener(
     "DOMContentLoaded",
     actualizarContadorCarrito
 );
+
+/**
+ * Ordena los productos según el criterio seleccionado.
+ * @param {Array} lista - Productos que queremos ordenar.
+ * @param {string} criterio - Tipo de ordenamiento.
+ * @returns {Array} Lista ordenada.
+ */
+const ordenarProductos = (lista, criterio) => {
+
+    // Hacemos una copia para no alterar el array original.
+    const listaOrdenada = [...lista];
+
+    switch (criterio) {
+
+        case "precioAsc":
+            listaOrdenada.sort((a, b) =>
+                a.producto.precio - b.producto.precio
+            );
+            break;
+
+        case "precioDesc":
+            listaOrdenada.sort((a, b) =>
+                b.producto.precio - a.producto.precio
+            );
+            break;
+
+        case "nombreAsc":
+            listaOrdenada.sort((a, b) =>
+                a.producto.nombre.localeCompare(b.producto.nombre, "es")
+            );
+            break;
+
+        case "nombreDesc":
+            listaOrdenada.sort((a, b) =>
+                b.producto.nombre.localeCompare(a.producto.nombre, "es")
+            );
+            break;
+
+        default:
+            listaOrdenada.sort((a, b) => a.index - b.index);
+    }
+
+    return listaOrdenada;
+};

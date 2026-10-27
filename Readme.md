@@ -51,20 +51,20 @@
 -  [x] Conversor de Unidades
 -  [x] Documentación
 -  [x] Grados a Radianes
--  [ ] Refactorización
--  [ ] Mostrar/Ocultar div
--  [ ] Mostrar/Ocultar Dialog
--  [ ] Operaciones Matemáticas
--  [ ] Conversor de Unidades II
--  [ ] Operaciones Matemáticas II
--  [ ] Renderizado Dinámico
--  [ ] Renderizado Dinámico del Dialog
--  [ ] Carrito de Compras con localstorage
--  [ ] Vaciar Carrito y Eliminar Producto
--  [ ] Filter
--  [ ] Formatear Precio
--  [ ] Total y Cantidad de Productos
--  [ ] Ordenar el catálogo
+-  [x] Refactorización
+-  [x] Mostrar/Ocultar div
+-  [x] Mostrar/Ocultar Dialog
+-  [x] Operaciones Matemáticas
+-  [x] Conversor de Unidades II
+-  [x] Operaciones Matemáticas II
+-  [x] Renderizado Dinámico
+-  [x] Renderizado Dinámico del Dialog
+-  [x] Carrito de Compras con localstorage
+-  [x] Vaciar Carrito y Eliminar Producto
+-  [x] Filter
+-  [x] Formatear Precio
+-  [x] Total y Cantidad de Productos
+-  [x] Ordenar el catálogo
 
 ## Unidad 4: Funcionamiento del Navegador y Herramientas de Desarrollo
 -  [ ] Checkeo de accesiilidad: AXE

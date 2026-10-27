@@ -113,3 +113,39 @@ li a:hover:not(.active) {
     padding: 10px;
     cursor: pointer;
 }
+
+/* Filtros del catálogo */
+
+.filtros {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.filtros div {
+    margin-bottom: 15px;
+}
+
+.filtros input,
+.filtros select {
+    padding: 8px;
+    margin: 5px;
+}
+
+.filtros label {
+    margin-right: 10px;
+}
+
+.ordenar-productos {
+    margin: 20px;
+    padding: 15px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+.ordenar-productos select {
+    padding: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+}

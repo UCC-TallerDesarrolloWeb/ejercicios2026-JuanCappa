@@ -98,6 +98,22 @@
     </section>
 
     <h2>Catálogo</h2>
+    
+<div class="ordenar-productos">
+    <label for="ordenProductos">Ordenar productos por:</label>
+
+    <select id="ordenProductos"
+            onchange="renderizarProductos()">
+
+        <option value="">Orden original</option>
+        <option value="precioAsc">Precio: menor a mayor</option>
+        <option value="precioDesc">Precio: mayor a menor</option>
+        <option value="nombreAsc">Nombre: A-Z</option>
+        <option value="nombreDesc">Nombre: Z-A</option>
+
+    </select>
+</div>
+
 
     <div id="catalogoProductos"
          class="productos-grid"></div>

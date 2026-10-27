@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="miEstilo.css">
+    <script src="misFunciones.js" defer></script>
+</head>
+
+<body onload="renderizarCarrito()">
+
+    <header>
+        <h1>Tienda de Taekwondo</h1>
+    </header>
+
+    <nav>
+        <a href="productos.html">Productos</a>
+        <a href="carrito.html">
+        Carrito (<span id="contadorCarrito">0</span>)
+        </a>
+    </nav>
+
+    <main>
+        <h2>Mi Carrito de Compras</h2>
+
+        <div id="listaCarrito" class="productos-grid"></div>
+
+        <h3 id="totalCarrito"></h3>
+        <button type="button" onclick="vaciarCarrito()">
+        Vaciar Carrito
+        </button>
+
+        <a href="productos.html">Seguir comprando</a>
+    </main>
+
+    <footer>
+        <p>Tienda de Taekwondo</p>
+    </footer>
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 ## ejercicio de taller de desarrollo web
 
--Juan Cappanera
+**Juan Cappanera**
 
 ## contenido
 
-este repositorio contiene ejercicios de practica para taller de desarrollo web.
+Este repositorio contiene ejercicios de practica para taller de desarrollo web.
 
 [link a diapositivas de clase] (https://chatgpt.com/)
 

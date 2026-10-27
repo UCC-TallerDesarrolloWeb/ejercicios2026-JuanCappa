@@ -1,46 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Operaciones Matemáticas</title>
-    <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
-    <link href="miEstilo.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="misFunciones.js"></script>
+    <link rel="stylesheet" href="miEstilo.css">
+    <script src="misFunciones.js" defer></script>
 </head>
 <body class="body-num">
 
 <div class="centrado div-conver">
     <h1>Operaciones Matemáticas</h1>
+
     <form class="operacionesMat">
         <p>
-            <input id="nums1" type="text" name="sum_num1">
+            <input id="nums1" type="text"
+                   oninput="calcularOperacion('suma')">
             +
-            <input id="nums2" type="text" name="sum_num2">
+            <input id="nums2" type="text"
+                   oninput="calcularOperacion('suma')">
             =
-            <input id="totalS" type="text" name="sum_total">
+            <span id="totalS"></span>
         </p>
+
         <p>
-            <input id="numr1" type="text" name="res_num1">
+            <input id="numr1" type="text"
+                   oninput="calcularOperacion('resta')">
             -
-            <input id="numr2" type="text" name="res_num2">
+            <input id="numr2" type="text"
+                   oninput="calcularOperacion('resta')">
             =
-            <input id="totalR" type="text" name="res_total">
+            <span id="totalR"></span>
         </p>
+
         <p>
-            <input id="numm1" type="text" name="mul_num1">
-            x
-            <input id="numm2" type="text" name="mul_num2">
+            <input id="numm1" type="text"
+                   oninput="calcularOperacion('multiplicacion')">
+            ×
+            <input id="numm2" type="text"
+                   oninput="calcularOperacion('multiplicacion')">
             =
-            <input id="totalM" type="text" name="mul_total">
+            <span id="totalM"></span>
         </p>
+
         <p>
-            <input id="numd1" type="text" name="div_num1">
+            <input id="numd1" type="text"
+                   oninput="calcularOperacion('division')">
             /
-            <input id="numd2" type="text" name="div_num2">
+            <input id="numd2" type="text"
+                   oninput="calcularOperacion('division')">
             =
-            <input id="totalD" type="text" name="div_total">
+            <span id="totalD"></span>
         </p>
     </form>
 </div>
+
 </body>
 </html>

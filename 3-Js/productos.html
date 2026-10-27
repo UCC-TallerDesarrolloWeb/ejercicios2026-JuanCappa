@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <link rel="stylesheet" href="miEstilo.css">
+    <script src="tienda.js" defer></script>
+    <script src="misFunciones.js" defer></script>
+</head>
+<body onload="renderizarProductos()">
+    <header>
+        <h1>Tienda de Taekwondo</h1>
+    </header>
+    <nav>
+    <a href="productos.html">Productos</a>
+    <a href="carrito.html">
+    Carrito (<span id="contadorCarrito">0</span>)
+    </a>
+    
+
+    
+<main>
+    <h2>Nuestros Productos</h2>
+
+    <section class="filtros">
+        <h3>Filtrar Productos</h3>
+
+        <!-- Buscar por nombre -->
+        <div>
+            <label for="busquedaProducto">Buscar producto:</label>
+            <input
+                type="text"
+                id="busquedaProducto"
+                placeholder="Nombre del producto"
+                oninput="renderizarProductos()">
+        </div>
+
+        <!-- Filtrar por precio -->
+        <div>
+            <label for="precioMin">Precio mínimo:</label>
+            <input
+                type="number"
+                id="precioMin"
+                min="0"
+                placeholder="Mínimo"
+                oninput="renderizarProductos()">
+
+            <label for="precioMax">Precio máximo:</label>
+            <input
+                type="number"
+                id="precioMax"
+                min="0"
+                placeholder="Máximo"
+                oninput="renderizarProductos()">
+        </div>
+
+        <!-- Filtrar por marca -->
+        <div>
+            <label for="marcaProducto">Marca:</label>
+            <select id="marcaProducto"
+                    onchange="renderizarProductos()">
+                <option value="">Todas las marcas</option>
+                <option value="Daedo">Daedo</option>
+                <option value="Gran Marc">Gran Marc</option>
+            </select>
+        </div>
+
+        <!-- Filtrar por categoría -->
+        <div>
+            <p>Categorías:</p>
+
+            <label>
+                <input type="checkbox"
+                       name="categoria"
+                       value="Protectores"
+                       onchange="renderizarProductos()">
+                Protectores
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="categoria"
+                       value="Dobok"
+                       onchange="renderizarProductos()">
+                Dobok
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       name="categoria"
+                       value="Entrenamiento"
+                       onchange="renderizarProductos()">
+                Entrenamiento
+            </label>
+        </div>
+    </section>
+
+    <h2>Catálogo</h2>
+    
+<div class="ordenar-productos">
+    <label for="ordenProductos">Ordenar productos por:</label>
+
+    <select id="ordenProductos"
+            onchange="renderizarProductos()">
+
+        <option value="">Orden original</option>
+        <option value="precioAsc">Precio: menor a mayor</option>
+        <option value="precioDesc">Precio: mayor a menor</option>
+        <option value="nombreAsc">Nombre: A-Z</option>
+        <option value="nombreDesc">Nombre: Z-A</option>
+
+    </select>
+</div>
+
+
+    <div id="catalogoProductos"
+         class="productos-grid"></div>
+</main>
+
+
+   
+<dialog id="detalleProducto">
+    <div id="contenidoDetalle"></div>
+
+    <button type="button"
+            onclick="cerrarDialogProducto()">
+        Cerrar
+    </button>
+</dialog>
+
+
+    <footer>
+        <p>Tienda de Taekwondo</p>
+    </footer>
+</body>
+</html>
